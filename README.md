@@ -1,15 +1,15 @@
-# Mongoose Localization Service
+# AI Localize
 
-A powerful Node.js package for translating MongoDB documents from English (or any source language) to any target language using AI services like OpenAI, Google Translate, or Azure Translator. Features intelligent Redis caching to reduce API costs and improve performance.
+A powerful Node.js package for translating documents and text from English (or any source language) to any target language using AI services like OpenAI, Google Translate, or Azure Translator. Features intelligent Redis caching to reduce API costs and improve performance.
 
 ## 🌟 Features
 
 - 🤖 **AI-Powered Translation**: Support for OpenAI GPT, Google Translate, and Azure Translator
 - ⚡ **Redis Caching**: Intelligent caching to reduce API calls and costs
-- 📄 **Document Translation**: Translate entire MongoDB documents or specific fields
+- 📄 **Document Translation**: Translate entire documents or specific fields
 - 🔄 **Batch Processing**: Efficient batch translation with progress tracking
 - 🎯 **Field Selection**: Choose which fields to translate or exclude
-- 🏗️ **Mongoose Integration**: Seamless integration with Mongoose models
+- 🏗️ **Flexible Integration**: Works with any JavaScript objects and documents
 - 📊 **Cache Management**: Built-in cache statistics and management
 - 🔧 **TypeScript Support**: Full TypeScript definitions included
 - 🌍 **Multi-language Support**: Translate to any language supported by AI providers
@@ -17,13 +17,13 @@ A powerful Node.js package for translating MongoDB documents from English (or an
 ## 📦 Installation
 
 ```bash
-npm install mongoose-localization-service
+npm install ai-localize
 ```
 
 ## 🚀 Quick Start
 
 ```typescript
-import { LocalizationService } from 'mongoose-localization-service';
+import { LocalizationService } from 'ai-localize';
 
 // Configuration
 const config = {
@@ -149,10 +149,10 @@ await localizationService.close();
 ```
 
 ##### `translateDocument(document, targetLanguage, options?): Promise<any>`
-Translates a MongoDB document to the target language.
+Translates a document to the target language.
 
 **Parameters:**
-- `document`: MongoDB document object to translate
+- `document`: Document object to translate
 - `targetLanguage`: Target language code (e.g., 'es', 'fr', 'de', 'hi', 'ja', 'ru')
 - `options`: Optional DocumentTranslationOptions
 
@@ -207,45 +207,6 @@ console.log(result.translatedText); // "¡Hola, mundo!"
 console.log(result.cached);         // false (first time)
 ```
 
-##### `translateModelDocuments(model, targetLanguage, query?, options?): Promise<any[]>`
-Translates documents from a Mongoose model.
-
-**Parameters:**
-- `model`: Mongoose model instance
-- `targetLanguage`: Target language code
-- `query`: MongoDB query object (optional)
-- `options`: Translation options with additional query options
-
-**Example:**
-```typescript
-const translatedPosts = await localizationService.translateModelDocuments(
-  Post,
-  'fr',
-  { category: 'technology' }, // query
-  {
-    limit: 10,
-    fields: ['title', 'content'],
-  }
-);
-```
-
-##### `translateDocumentById(model, documentId, targetLanguage, options?): Promise<any>`
-Translates a single document by ID.
-
-**Parameters:**
-- `model`: Mongoose model instance
-- `documentId`: Document ID string
-- `targetLanguage`: Target language code
-- `options`: Translation options
-
-**Example:**
-```typescript
-const translatedPost = await localizationService.translateDocumentById(
-  Post,
-  '507f1f77bcf86cd799439011',
-  'de'
-);
-```
 
 ##### `translateWithFieldMapping(document, targetLanguage, fieldMapping, options?): Promise<any>`
 Translates with custom field name mapping.
@@ -389,32 +350,34 @@ const frenchProduct = await localizationService.translateDocument(product, 'fr')
 const hindiProduct = await localizationService.translateDocument(product, 'hi');
 ```
 
-### Mongoose Integration
+### Working with Arrays of Documents
 ```typescript
-import mongoose from 'mongoose';
-
-const ProductSchema = new mongoose.Schema({
-  name: String,
-  description: String,
-  category: String,
-  price: Number,
-  tags: [String],
-});
-
-const Product = mongoose.model('Product', ProductSchema);
+// Example: Working with an array of products
+const products = [
+  {
+    name: 'Wireless Headphones',
+    description: 'High-quality wireless headphones',
+    category: 'Electronics',
+    price: 199.99,
+  },
+  {
+    name: 'Smart Watch',
+    description: 'Fitness tracking smart watch',
+    category: 'Electronics',
+    price: 299.99,
+  },
+];
 
 // Translate all products
-const products = await Product.find();
 const translatedProducts = await localizationService.translateDocuments(
   products,
   'ja'
 );
 
-// Translate specific products
-const techProducts = await localizationService.translateModelDocuments(
-  Product,
+// Translate with field selection
+const techProducts = await localizationService.translateDocuments(
+  products,
   'de',
-  { category: 'Electronics' },
   { fields: ['name', 'description'] }
 );
 ```
@@ -442,7 +405,8 @@ const result = await localizationService.translateDocument(
 
 ### Batch Processing with Progress
 ```typescript
-const documents = await Model.find().limit(1000);
+// Example: Processing a large array of documents
+const documents = [/* your array of documents */];
 const translatedDocs = await localizationService.translateWithProgress(
   documents,
   'ar',
@@ -479,7 +443,6 @@ AZURE_TRANSLATOR_API_KEY=your-azure-api-key
 ## 📋 Prerequisites
 
 - Node.js 16+
-- MongoDB database
 - Redis server
 - AI API key (OpenAI, Google Translate, or Azure Translator)
 
@@ -514,6 +477,6 @@ For issues and questions, please open an issue on GitHub.
 - Initial release
 - Support for OpenAI, Google Translate, and Azure Translator
 - Redis caching implementation
-- Mongoose integration
+- Flexible document processing
 - TypeScript support
 - Batch processing with progress tracking

@@ -1,8 +1,7 @@
-import { Document } from 'mongoose';
 
 export class TextExtractor {
   /**
-   * Extract all text content from a MongoDB document
+   * Extract all text content from a document
    */
   static extractTextFromDocument(doc: any, options: {
     fields?: string[];
@@ -15,8 +14,8 @@ export class TextExtractor {
       if (obj === null || obj === undefined) return;
       
       if (typeof obj === 'string') {
-        // Only extract if it's not empty and not a MongoDB ObjectId
-        if (obj.trim() && !obj.match(/^[0-9a-fA-F]{24}$/)) {
+        // Only extract if it's not empty
+        if (obj.trim()) {
           texts.push(obj.trim());
         }
         return;
@@ -43,8 +42,8 @@ export class TextExtractor {
             return;
           }
           
-          // Skip MongoDB internal fields
-          if (key.startsWith('_') || key === '__v') {
+          // Skip internal fields
+          if (key.startsWith('_')) {
             return;
           }
           

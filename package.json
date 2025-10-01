@@ -1,7 +1,7 @@
 {
-  "name": "mongoose-localization-service",
+  "name": "ai-localize",
   "version": "1.0.0",
-  "description": "A localization service for MongoDB documents with AI translation and Redis caching",
+  "description": "A localization service for documents and text with AI translation and Redis caching",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -9,26 +9,43 @@
     "prepublishOnly": "npm run build"
   },
   "keywords": [
-    "mongoose",
     "localization",
     "translation",
-    "mongodb",
+    "ai-translation",
+    "artificial-intelligence",
+    "machine-translation",
     "redis",
-    "ai",
-    "i18n"
+    "redis-cache",
+    "caching",
+    "i18n",
+    "internationalization",
+    "nodejs",
+    "typescript",
+    "nlp",
+    "natural-language-processing",
+    "text-processing",
+    "language-detection",
+    "multilingual",
+    "translation-service",
+    "localization-service",
+    "cache-service",
+    "api",
+    "microservice",
+    "backend",
+    "document-translation",
+    "content-localization"
   ],
   "author": "Sumit Kumar",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/mongoose-localization-service.git"
+    "url": "https://github.com/sumit6387/ai-localize"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/mongoose-localization-service/issues"
+    "url": "https://github.com/sumit6387/ai-localize/issues"
   },
-  "homepage": "https://github.com/yourusername/mongoose-localization-service#readme",
+  "homepage": "https://github.com/sumit6387/ai-localize#readme",
   "dependencies": {
-    "mongoose": "^8.0.0",
     "redis": "^4.6.0",
     "axios": "^1.6.0",
     "dotenv": "^16.3.0"

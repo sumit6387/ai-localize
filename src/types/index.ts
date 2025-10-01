@@ -36,5 +36,4 @@ export interface CachedTranslation {
 
 export interface LocalizationServiceOptions {
   config: LocalizationConfig;
-  mongooseConnection?: any; // mongoose connection instance
 }

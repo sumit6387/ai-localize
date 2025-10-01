@@ -1,4 +1,3 @@
-import { Document, Model } from 'mongoose';
 import { CacheService } from './cacheService';
 import { TranslationService } from './translationService';
 import { TextExtractor } from '../utils/textExtractor';
@@ -173,48 +172,6 @@ export class LocalizationService {
     return results;
   }
 
-  /**
-   * Translate documents from a Mongoose model
-   */
-  async translateModelDocuments(
-    model: Model<any>,
-    targetLanguage: string,
-    query: any = {},
-    options: DocumentTranslationOptions & {
-      limit?: number;
-      skip?: number;
-      sort?: any;
-    } = {}
-  ): Promise<any[]> {
-    const { limit, skip, sort, ...translationOptions } = options;
-
-    const documents = await model
-      .find(query)
-      .limit(limit || 100)
-      .skip(skip || 0)
-      .sort(sort || { _id: 1 })
-      .lean();
-
-    return this.translateDocuments(documents, targetLanguage, translationOptions);
-  }
-
-  /**
-   * Translate a single document by ID
-   */
-  async translateDocumentById(
-    model: Model<any>,
-    documentId: string,
-    targetLanguage: string,
-    options: DocumentTranslationOptions = {}
-  ): Promise<any | null> {
-    const document = await model.findById(documentId).lean();
-    
-    if (!document) {
-      return null;
-    }
-
-    return this.translateDocument(document, targetLanguage, options);
-  }
 
   /**
    * Get cache statistics
