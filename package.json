@@ -1,0 +1,43 @@
+{
+  "name": "mongoose-localization-service",
+  "version": "1.0.0",
+  "description": "A localization service for MongoDB documents with AI translation and Redis caching",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mongoose",
+    "localization",
+    "translation",
+    "mongodb",
+    "redis",
+    "ai",
+    "i18n"
+  ],
+  "author": "Sumit Kumar",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/mongoose-localization-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/mongoose-localization-service/issues"
+  },
+  "homepage": "https://github.com/yourusername/mongoose-localization-service#readme",
+  "dependencies": {
+    "mongoose": "^8.0.0",
+    "redis": "^4.6.0",
+    "axios": "^1.6.0",
+    "dotenv": "^16.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
