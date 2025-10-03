@@ -429,35 +429,11 @@ const translatedDocs = await localizationService.translateWithProgress(
 5. **Rate Limiting**: Respect AI provider rate limits by adjusting batch sizes
 6. **Connection Pooling**: Reuse service instances when possible
 
-## 🔧 Environment Variables
-
-Create a `.env` file:
-
-```env
-REDIS_URL=redis://localhost:6379
-OPENAI_API_KEY=sk-your-openai-api-key
-GOOGLE_TRANSLATE_API_KEY=your-google-api-key
-AZURE_TRANSLATOR_API_KEY=your-azure-api-key
-```
-
 ## 📋 Prerequisites
 
 - Node.js 16+
 - Redis server
 - AI API key (OpenAI, Google Translate, or Azure Translator)
-
-## 🛠️ Development
-
-```bash
-# Install dependencies
-npm install
-
-# Build TypeScript
-npm run build
-
-# Run in development mode
-npm run dev
-```
 
 ## 📄 License
 
