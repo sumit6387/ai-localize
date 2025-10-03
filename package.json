@@ -1,6 +1,6 @@
 {
   "name": "ai-localize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A localization service for documents and text with AI translation and Redis caching",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
