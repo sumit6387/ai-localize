@@ -4,7 +4,7 @@ A powerful Node.js package for translating documents and text from English (or a
 
 ## 🌟 Features
 
-- 🤖 **AI-Powered Translation**: Support for OpenAI GPT, Google Translate, and Azure Translator
+- 🤖 **AI-Powered Translation**: Support for OpenAI GPT, Google Translate, Google gemini, and Azure Translator
 - ⚡ **Redis Caching**: Intelligent caching to reduce API calls and costs
 - 📄 **Document Translation**: Translate entire documents or specific fields
 - 🔄 **Batch Processing**: Efficient batch translation with progress tracking
@@ -29,7 +29,7 @@ import { LocalizationService } from 'ai-localize';
 const config = {
   redisUrl: 'redis://localhost:6379',    // Your Redis URL
   aiApiKey: 'your-openai-api-key',        // Your AI API key
-  aiProvider: 'openai',                   // 'openai', 'google', or 'azure'
+  aiProvider: 'openai',                   // 'openai', 'google' 'azure' or 'gemini'
   sourceLanguage: 'en',                   // Source language (default: 'en')
   cacheExpiration: 86400,                 // Cache expiration in seconds (24 hours)
   batchSize: 10,                          // Batch size for translations
@@ -119,6 +119,18 @@ const config = {
 ```
 
 **Get API Key**: Visit [Azure Portal](https://portal.azure.com/) and create a Translator resource.
+
+
+### Google Gemini
+```typescript
+const config = {
+  redisUrl: 'redis://localhost:6379',
+  aiApiKey: 'your-google-gemini-api-key',
+  aiProvider: 'gemini',
+};
+```
+
+**Get API Key**: Visit [Google Gemini](https://ai.google.dev/gemini-api/docs/api-key) and create a gemini.
 
 ## 📚 API Reference
 
@@ -382,6 +394,11 @@ const techProducts = await localizationService.translateDocuments(
 );
 ```
 
+### Fetch all translation as json format
+```typescript
+const allTranslationsJson = await localizationService.fetchAllKeysAsJson();
+```
+
 ### Field Selection
 ```typescript
 // Translate only specific fields
@@ -456,3 +473,7 @@ For issues and questions, please open an issue on GitHub.
 - Flexible document processing
 - TypeScript support
 - Batch processing with progress tracking
+
+### v1.0.2
+- Added Google Gemini integration
+- Fetch all cached key in json based on provided source and destination keys

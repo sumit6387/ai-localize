@@ -149,6 +149,26 @@ export class CacheService {
     return results;
   }
 
+  async getAllKeysAndValues() {
+    const keys = await this.client.keys("*");
+    const result: Record<string, Record<string, string>> = {};
+  
+    for (const key of keys) {
+      const value = await this.client.get(key);
+      const splittedKey = key.split(":");
+      const dataKey = Buffer.from(splittedKey[3], 'base64').toString('utf8');
+      if(result[splittedKey[2]]){
+        result[splittedKey[2]][dataKey] = value || "";
+      }else{
+        result[splittedKey[2]] = {
+          [dataKey] : value || ""
+        }
+      }
+    }
+  
+    return result;
+  }
+
   /**
    * Cache multiple translations
    */

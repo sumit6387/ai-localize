@@ -23,6 +23,9 @@ export class TranslationService {
         case 'azure':
           translatedText = await this.translateWithAzure(text, sourceLanguage, targetLanguage);
           break;
+        case 'gemini':
+          translatedText = await this.translateWithGemini(text, sourceLanguage, targetLanguage);
+          break;
         default:
           throw new Error(`Unsupported AI provider: ${this.config.aiProvider}`);
       }
@@ -106,6 +109,43 @@ export class TranslationService {
 
     return response.data.choices[0].message.content.trim();
   }
+
+  /**
+ * Translate with Gemini API
+ */
+private async translateWithGemini(
+  text: string,
+  sourceLanguage: string,
+  targetLanguage: string
+): Promise<string> {
+  const response: AxiosResponse = await axios.post(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.config.aiApiKey}`,
+    {
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            {
+              text: `You are a professional translator. Translate the following text from ${sourceLanguage} to ${targetLanguage}. Only return the translated text, nothing else.\n\n${text}`
+            }
+          ]
+        }
+      ]
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  const candidates = response.data?.candidates;
+  if (!candidates || candidates.length === 0) {
+    throw new Error('No response from Gemini API');
+  }
+
+  return candidates[0].content.parts[0].text.trim();
+}
 
   /**
    * Translate batch with OpenAI API

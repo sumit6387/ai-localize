@@ -150,6 +150,11 @@ export class LocalizationService {
     );
   }
 
+  async fetchAllKeysAsJson(): Promise<Record<string, Record<string, string>>> {
+    const result = await this.cacheService.getAllKeysAndValues();
+    return result;
+  }
+
   /**
    * Translate multiple documents
    */

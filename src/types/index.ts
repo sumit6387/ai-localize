@@ -1,7 +1,7 @@
 export interface LocalizationConfig {
   redisUrl: string;
   aiApiKey: string;
-  aiProvider: 'openai' | 'google' | 'azure';
+  aiProvider: 'openai' | 'google' | 'azure' | 'gemini';
   sourceLanguage?: string;
   cacheExpiration?: number; // in seconds, default 24 hours
   batchSize?: number; // for batch translations

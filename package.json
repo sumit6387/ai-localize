@@ -1,7 +1,7 @@
 {
   "name": "ai-localize",
-  "version": "1.0.1",
-  "description": "A localization service for documents and text with AI translation and Redis caching",
+  "version": "1.0.2",
+  "description": "A localization service for documents and text with AI translation and Redis caching. Also translate backend data with caching",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -33,7 +33,8 @@
     "microservice",
     "backend",
     "document-translation",
-    "content-localization"
+    "content-localization",
+    "google-gemini"
   ],
   "author": "Sumit Kumar",
   "license": "MIT",
