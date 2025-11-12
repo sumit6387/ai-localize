@@ -5,9 +5,12 @@ export class CacheService {
   private client: RedisClientType;
   private isConnected: boolean = false;
 
-  constructor(private redisUrl: string) {
+  constructor(private redisUrl: string, tls: boolean) {
     this.client = createClient({
       url: redisUrl,
+      socket: {
+        tls: tls ? true : false,
+      }
     });
 
     this.client.on('error', (err) => {
