@@ -6,6 +6,7 @@ export interface LocalizationConfig {
   cacheExpiration?: number; // in seconds, default 24 hours
   batchSize?: number; // for batch translations
   cacheTls?: boolean;
+  redisServerName?: string;
 }
 
 export interface TranslationRequest {

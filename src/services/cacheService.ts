@@ -6,13 +6,11 @@ export class CacheService {
   private client: RedisClientType;
   private isConnected: boolean = false;
 
-  constructor(private redisUrl: string, tls: boolean) {
-    const parsed = new URL(redisUrl);
-    const tlsServerName = parsed.hostname;
+  constructor(private redisUrl: string, tls: boolean, serverName?:string) {
     this.client = createClient({
       url: redisUrl,
       socket: {
-        ...(tls ? { tls: true, servername: tlsServerName } : {}),
+        ...(tls ? { tls: true, servername: serverName } : {}),
       }
     });
 

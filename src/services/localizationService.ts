@@ -22,7 +22,7 @@ export class LocalizationService {
       ...options.config,
     };
 
-    this.cacheService = new CacheService(this.config.redisUrl, this.config.cacheTls ?? false);
+    this.cacheService = new CacheService(this.config.redisUrl, this.config.cacheTls ?? false, this.config.redisServerName);
     this.translationService = new TranslationService(this.config);
   }
 
