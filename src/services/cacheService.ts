@@ -1,15 +1,18 @@
 import { createClient, RedisClientType } from 'redis';
 import { CachedTranslation } from '../types';
+import { URL } from "url";
 
 export class CacheService {
   private client: RedisClientType;
   private isConnected: boolean = false;
 
   constructor(private redisUrl: string, tls: boolean) {
+    const parsed = new URL(redisUrl);
+    const tlsServerName = parsed.hostname;
     this.client = createClient({
       url: redisUrl,
       socket: {
-        tls: tls ? true : false,
+        ...(tls ? { tls: true, servername: tlsServerName } : {}),
       }
     });
 
